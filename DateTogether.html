@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You & Me</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous"> 
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://raw.githubusercontent.com/HostingerCodesphere/Kiw/main/good.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+            align-items: center;
+            min-height: 100vh;
+        }
+        .calendar-container {
+            width: 80%;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(20px, 1fr)); 
+            gap: 2px;
+            width: 100%;
+            max-width: 400px; 
+            margin: 0 auto; 
+        }
+        .calendar div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            font-size: 0.6em;
+            color: #a85a3e;
+            cursor: pointer;
+        }
+        .calendar .empty {
+            background-color: transparent;
+            cursor: default;
+        }
+        .calendar .kamudanaku {
+            border: 1px solid #a85a3e;
+            border-radius: 50%;
+            color: #a85a3e;
+        }
+       .info-popup {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000; /* Untuk memastikan popup muncul di depan elemen lain */
+    max-width: 200px; /* Membatasi lebar popup */
+    word-wrap: break-word; /* Agar teks tidak keluar dari batas popup */
+}
+.footer {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .footer a i {
+            margin-bottom: 5px;
+            font-size: 1.5em;
+        }
+
+        .footer a span {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">Januari</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">February</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">March</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div class="kamudanaku" onclick="showInfo('Dzarel\'Tabokan Pertama Ke Amanda', event)">27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">April</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div class="kamudanaku" onclick="showInfo('Dzarel\'Menyatakan Cinta Ke Amanda', event)">30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">May</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">June</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div class="kamudanaku" onclick="showInfo('graduation & Fotbar Pertama Kita', event)">22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div class="kamudanaku" onclick="showInfo('Frist Date Kita', event)">26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">July</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">August</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+<div class="calendar-header">September</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div class="kamudanaku" onclick="showInfo('Ulang Tahun Amanda', event)">15</div>
+            <div class="kamudanaku" onclick="showInfo('Ulang Tahun Dzarel', event)">16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">October</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="calendar-container">
+        <div class="calendar-header">November</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div> 
+    <div class="calendar-container">
+        <div class="calendar-header">December</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>   
+    </div>
+ <div class="footer"> <a href="Home.html"> <i class="fas fa-arrow-left"></i> <span>Kembali</span></a> 
+    <script>
+        function showInfo(info, event) {
+    const infoPopup = document.getElementById('infoPopup');
+    infoPopup.textContent = info;
+    infoPopup.style.display = 'block';
+
+    // Dapatkan posisi elemen yang diklik
+    const rect = event.target.getBoundingClientRect();
+    const popupHeight = infoPopup.offsetHeight;
+    const popupWidth = infoPopup.offsetWidth;
+
+    // Atur posisi popup di dekat elemen yang diklik, sesuaikan agar tetap dalam viewport
+    let top = rect.bottom + window.scrollY;
+    let left = rect.left + window.scrollX;
+
+    if (top + popupHeight > window.innerHeight + window.scrollY) {
+        top = rect.top + window.scrollY - popupHeight;
+    }
+
+    if (left + popupWidth > window.innerWidth + window.scrollX) {
+        left = window.innerWidth + window.scrollX - popupWidth - 10; // 10px padding
+    }
+
+    infoPopup.style.top = `${top}px`;
+    infoPopup.style.left = `${left}px`;
+
+    setTimeout(() => {
+        infoPopup.style.display = 'none';
+    }, 3000);
+}
+    </script>
+</body>
+</html>

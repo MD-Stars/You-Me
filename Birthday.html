@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You & Me</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous"> 
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://raw.githubusercontent.com/HostingerCodesphere/Kiw/main/good.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Menempatkan konten di bagian atas */
+            align-items: center;
+            min-height: 100vh;
+        }
+        .calendar-container {
+            width: 80%;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(20px, 1fr)); /* Menggunakan minmax untuk menjaga lebar */
+            gap: 2px;
+            width: 100%; /* Menyamakan lebar dengan kontainer */
+            max-width: 400px; /* Batasan lebar maksimum yang sesuai dengan desain */
+            margin: 0 auto; /* Memusatkan kalender di tengah */
+        }
+        .calendar div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            font-size: 0.6em;
+            color: #a85a3e;
+            cursor: pointer;
+        }
+        .calendar .empty {
+            background-color: transparent;
+            cursor: default;
+        }
+        .calendar .birthday {
+            border: 1px solid #a85a3e;
+            border-radius: 50%;
+            color: #a85a3e;
+        }
+        .info-popup {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .countdown-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px; /* Penyesuaian jarak dari kalender */
+            text-align: center;
+            font-size: 1.5em;
+            color: #000; /* Warna hitam untuk teks nama */
+        }
+        .countdown {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5em;
+            color: #fff; /* Warna putih untuk teks countdown */
+            background-color: #000; /* Warna hitam untuk background countdown */
+            border: 1px solid #000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-top: 10px; /* Penyesuaian jarak dari teks nama */
+        }
+        .person-name {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #000; /* Warna hitam untuk teks nama */
+        }
+        .footer {
+            padding: 20px;
+            text-align: center;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .footer a i {
+            margin-bottom: 5px;
+            font-size: 1.5em;
+        }
+        .footer a span {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <div class="calendar-header">September</div>
+        <br>
+        <div class="calendar">
+            <div class="empty"></div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+            <div class="birthday" onclick="showInfo('ULANG TAHUN AMANDA')">15</div>
+            <div class="birthday" onclick="showInfo('ULANG TAHUN DZAREL')">16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+        </div>
+        <div id="infoPopup" class="info-popup"></div>
+    </div>
+    <div class="countdown-container">
+        <div class="person-name">Amanda</div>
+        <div class="countdown" id="countdownAmanda">00:00:00:00</div>
+    </div>
+    <div class="countdown-container">
+        <div class="person-name">Dzarel</div>
+        <div class="countdown" id="countdownDzarel">00:00:00:00</div>
+    </div>
+    <div class="footer"> <a href="Home.html"> <i class="fas fa-arrow-left"></i> <span>Kembali</span></a> 
+    <script>
+        function showInfo(info) {
+    const infoPopup = document.getElementById('infoPopup');
+    infoPopup.textContent = info;
+    infoPopup.style.display = 'block';
+    setTimeout(() => {
+        infoPopup.style.display = 'none';
+    }, 3000);
+}
+
+// Meminta izin notifikasi
+function requestNotificationPermission() {
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission();
+    }
+}
+
+// Menampilkan notifikasi
+function showNotification(title, body) {
+    if (Notification.permission === 'granted') {
+        new Notification(title, { body });
+    }
+}
+
+// Menghitung mundur waktu ulang tahun Amanda
+const birthdayAmanda = new Date('2024-09-15T00:00:00'); // Tanggal ulang tahun Amanda
+const countdownElementAmanda = document.getElementById('countdownAmanda');
+
+function updateCountdownAmanda() {
+    const currentDate = new Date();
+    const difference = birthdayAmanda - currentDate;
+
+    if (difference <= 0) {
+        countdownElementAmanda.textContent = '00:00:00:00';
+        showNotification('Selamat Ulang Tahunn Dee!!', 'Hari ini Adalah Hari Ulang Tahunmu...');
+        return;
+    }
+
+    const seconds = Math.floor(difference / 1000) % 60;
+    const minutes = Math.floor(difference / (1000 * 60)) % 60;
+    const hours = Math.floor(difference / (1000 * 60 * 60)) % 24;
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+    const formattedTime = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    countdownElementAmanda.textContent = formattedTime;
+
+    // Menampilkan notifikasi untuk 3, 2, dan 1 hari sebelum ulang tahun
+    if (days === 3 && hours === 0 && minutes === 0 && seconds === 0) {
+        showNotification('Pengingat Ulang Tahun', '3 hari lagi adalah ulang tahun Amanda!');
+    } else if (days === 2 && hours === 0 && minutes === 0 && seconds === 0) {
+        showNotification('Pengingat Ulang Tahun', '2 hari lagi adalah ulang tahun Amanda!');
+    } else if (days === 1 && hours === 0 && minutes === 0 && seconds === 0) {
+        showNotification('Pengingat Ulang Tahun', '1 hari lagi adalah ulang tahun Amanda!');
+    }
+}
+
+// Memanggil fungsi updateCountdownAmanda setiap detik
+setInterval(updateCountdownAmanda, 1000);
+
+// Menghitung mundur waktu ulang tahun Dzarel
+const birthdayDzarel = new Date('2024-09-16T00:00:00'); // Tanggal ulang tahun Dzarel
+const countdownElementDzarel = document.getElementById('countdownDzarel');
+
+function updateCountdownDzarel() {
+    const currentDate = new Date();
+    const difference = birthdayDzarel - currentDate;
+
+    if (difference <= 0) {
+        countdownElementDzarel.textContent = '00:00:00:00';
+        showNotification('Selamat Ulang Tahun A!!', 'Hari ini adalah ulang tahunmuu..');
+        return;
+    }
+
+    const seconds = Math.floor(difference / 1000) % 60;
+    const minutes = Math.floor(difference / (1000 * 60)) % 60;
+    const hours = Math.floor(difference / (1000 * 60 * 60)) % 24;
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+    const formattedTime = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    countdownElementDzarel.textContent = formattedTime;
+
+    // Menampilkan notifikasi untuk 3, 2, dan 1 hari sebelum ulang tahun
+    if (days === 3 && hours === 0 && minutes === 0 && seconds === 0) {
+        showNotification('Pengingat Ulang Tahun', '3 hari lagi adalah ulang tahun Dzarel!');
+    } else if (days === 2 && hours === 0 && minutes === 0 && seconds === 0) {
+        showNotification('Pengingat Ulang Tahun', '2 hari lagi adalah ulang tahun Dzarel!');
+    } else if (days === 1 && hours === 0 && minutes === 0 && seconds === 0) {
+        showNotification('Pengingat Ulang Tahun', '1 hari lagi adalah ulang tahun Dzarel!');
+    }
+}
+
+// Memanggil fungsi updateCountdownDzarel setiap detik
+setInterval(updateCountdownDzarel, 1000);
+
+// Meminta izin notifikasi saat halaman dimuat
+requestNotificationPermission();
+    </script>
+</body>
+</html>

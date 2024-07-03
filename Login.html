@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title></title> 
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+        }
+
+        body {
+            background: url('https://raw.githubusercontent.com/HostingerCodesphere/Kiw/main/good.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .login-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .login-container img {
+            display: block;
+            margin: 0 auto 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .login-container input {
+            width: calc(100% - 40px);
+            padding: 15px;
+            margin: 10px auto;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+            display: block;
+            transition: background 0.3s ease;
+        }
+        
+        .login-container input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .login-container input:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .login-container button {
+            width: calc(100% - 100px);
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+        
+        .login-container button:active {
+            background-color: #3e8e41;
+            transform: scale(0.98);
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="login-container"> 
+   <img src="src/Profile-MD.jpg" alt=""> 
+   <input type="text" id="username" placeholder="Username"> 
+   <input type="password" id="password" placeholder="Password"> <button onclick="login()">Login</button> 
+  </div> 
+  <script>
+        function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const predefinedUsername = 'Forever';
+        const predefinedPassword = 'Hanya Kamu Dan Aku';
+
+        if (username === predefinedUsername && password === predefinedPassword) {
+            window.location.href = 'Home.html';
+        } else if (username === predefinedUsername && password !== predefinedPassword) {
+            alert('Maaf Password Yang Kamu Masukan Salah');
+        } else if (username !== predefinedUsername && password === predefinedPassword) {
+            alert('Maaf Username Yang Kamu Masukan Salah');
+        } else {
+            alert('Username & Password Yang Kamu Masukan Salah:)');
+        }
+    }
+    </script> 
+ </body>
+</html>
